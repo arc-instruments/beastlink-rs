@@ -3,8 +3,6 @@
 #![allow(dead_code)]
 #![allow(non_snake_case)]
 #![allow(non_camel_case_types)]
-#[link(name="beastlink-1.0")]
-#[link(name="udk3-1.5.1")]
 
 pub const BL_IF_BUFFER_SIZE: ::std::os::raw::c_uint = 16384;
 pub const BL_SUCCESS: ::std::os::raw::c_uint = 0;

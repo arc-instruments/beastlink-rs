@@ -1,8 +1,10 @@
+#[cfg(target_os="linux")]
 use std::env;
 
-#[cfg(any(target_os="linux"))]
+#[cfg(target_os="linux")]
 fn main() {
-    let out_dir = env::var("OUT_DIR").unwrap();
+
+    // Also look in $LIBRARY_PATH
     match env::var("LIBRARY_PATH") {
         Ok(path) => {
             let parts = path.split(":");
@@ -13,8 +15,14 @@ fn main() {
         Err(_) => {}
     }
 
-    println!("cargo:rustc-link-search={}/build", out_dir);
-
     println!("cargo:rustc-link-lib=dylib=beastlink-1.0");
 }
 
+#[cfg(target_os="windows")]
+fn main() {
+    #[cfg(target_arch="x86_64")]
+    println!("cargo:rustc-link-lib=dylib=beastlink-1.0-x86_64");
+
+    #[cfg(target_arch="x86")]
+    println!("cargo:rustc-link-lib=dylib=beastlink-1.0-x86");
+}
