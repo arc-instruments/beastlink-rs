@@ -1,0 +1,10 @@
+Package: cesys-udk-lite
+Version: 1.5.3-1
+Section: base
+Priority: optional
+Architecture: amd64
+Depends: libc6 (>=2.27), libusb-1.0-0 (>=1.0.18)
+Maintainer: Spyros Stathopoulos <spyros@arc-instruments.co.uk>
+Description: CESYS UDK libraries
+ CESYS UDK USB libraries and udev rules for usb-based
+ FPGA boards.

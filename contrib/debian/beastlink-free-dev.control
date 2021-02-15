@@ -1,0 +1,9 @@
+Package: beastlink-free-dev
+Version: 1.0-1
+Section: base
+Priority: optional
+Architecture: amd64
+Depends: libc6 (>=2.27), libusb-1.0-0 (>=1.0.18), cesys-udk-lite (>>1.5.0), beastlink-free (=1.0-1)
+Maintainer: Spyros Stathopoulos <spyros@arc-instruments.co.uk>
+Description: CESYS Beastlink libraries
+ Libraries required to interface with CESYS EFM03 boards (development headers)
