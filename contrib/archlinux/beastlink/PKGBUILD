@@ -1,0 +1,38 @@
+# Maintainer: Spyros Stathopoulos <spyros[AT]arc-instruments[DOT]co[DOT]uk>
+
+pkgname=beastlink-free
+pkgver=1.0
+pkgrel=1
+pkgdesc="CESYS BeastLink library for EFM FPGA boards (free version)"
+arch=('x86_64')
+url="https://www.cesys.com"
+license=('custom:CSL')
+depends=('cesys-udk')
+source=("https://www.cesys.com/fileadmin/user_upload/service/FPGA/fpga%20boards%20%26%20modules/BeastLink/beastlink-${pkgver}-linux-free.tar.bz2"
+        "CSL-1.0.txt")
+sha1sums=('9415f8e0be714e7bfa274b373b5f1684e776f871'
+          '7535094bec6ad88d73780d7e63136a82561a0c0b')
+options=('!strip' 'staticlibs')
+
+build() {
+  # build the c++ library
+  cd "${srcdir}/beastlink-${pkgver}-linux-free/api/c++/"
+  g++ -fPIC -O2 -shared -I./include -L../../runtime -lbeastlink-1.0 beastlink++.cpp -o libbeastlink++.so
+  g++ -O2 -I./include -c beastlink++.cpp -o beastlink++.o
+  ar rcs libbeastlink++.a beastlink++.o
+}
+
+package() {
+
+  install -D -m644 "CSL-1.0.txt" "${pkgdir}/usr/share/licenses/${pkgname}/CSL-1.0.txt"
+
+  cd "${srcdir}/beastlink-${pkgver}-linux-free"
+  install -D -m755 "runtime/libbeastlink-${pkgver}.so" "${pkgdir}/usr/lib/libbeastlink-${pkgver}.so"
+  install -D -m755 "api/c++/libbeastlink++.a" "${pkgdir}/usr/lib/libbeastlink++.a"
+  install -D -m755 "api/c++/libbeastlink++.so" "${pkgdir}/usr/lib/libbeastlink++.so"
+
+  install -D -m644 "api/c/include/beastlink.h" "${pkgdir}/usr/include/beastlink.h"
+  install -D -m644 "api/c++/beastlink++.h" "${pkgdir}/usr/include/beastlink++.h"
+
+  install -D -m644 "runtime/beastlink_exdes_top.bin" "${pkgdir}/opt/cesys-udk/beastlink-tools/beastlink_exdes_top.bin"
+}

@@ -1,0 +1,2 @@
+ACTION=="add", SUBSYSTEMS=="usb", ATTRS{idVendor}=="10f8", ATTRS{idProduct}=="c4??", MODE="660", GROUP="plugdev", RUN+="/bin/bash /opt/cesys-udk/udk3-tools/cuudfdl.sh"
+ACTION=="add", SUBSYSTEMS=="usb", ATTRS{idVendor}=="10f8", ATTRS{idProduct}=="c5??", MODE="660", GROUP="plugdev", RUN+="/bin/bash /opt/cesys-udk/udk3-tools/cuudfdl.sh"

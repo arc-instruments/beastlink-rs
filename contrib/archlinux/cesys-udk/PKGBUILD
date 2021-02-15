@@ -1,0 +1,51 @@
+# Maintainer: Spyros Stathopoulos <spyros[AT]arc-instruments[DOT]co[DOT]uk>
+
+pkgname=cesys-udk-lite
+pkgver=1.5.1
+_blver=1.0
+pkgrel=1
+pkgdesc="CESYS UDK libraries and support tools"
+arch=('x86_64')
+url="https://www.cesys.com"
+license=('custom:CSL')
+depends=('libusb')
+provides=('cesys-udk')
+conflicts=('cesys-udk')
+source=("https://www.cesys.com/fileadmin/user_upload/service/FPGA/fpga%20boards%20%26%20modules/BeastLink/beastlink-1.0-linux-free.tar.bz2"
+        "cuudfdl.sh"
+        "99-cesys-udk.rules")
+sha1sums=('9415f8e0be714e7bfa274b373b5f1684e776f871'
+          '775c897969fbc4b3dd261a4a960c8d4647a9a88b'
+          'f0b020b4e4b2baf137d58a88f6e80526cf276b31')
+options=('!strip' 'staticlibs')
+
+prepare() {
+  cd "${srcdir}/beastlink-${_blver}-linux-free/driver"
+  msg2 "Extracting the udk3 libraries"
+  tar xvfj udk3-service-linux-${pkgver}-${arch}.tar.bz2 -C ..
+}
+
+build() {
+  msg2 "Nothing to build"
+}
+
+package() {
+
+  cd "${srcdir}"
+  install -D -m644 "99-cesys-udk.rules" "${pkgdir}/usr/lib/udev/rules.d/99-cesys-udk.rules"
+  install -D -m755 "cuudfdl.sh" "${pkgdir}/opt/cesys-udk/udk3-tools/cuudfdl.sh"
+
+  cd "${srcdir}/beastlink-${_blver}-linux-free/udk3-service-linux-${pkgver}-${arch}"
+  install -D -m644 "license/CSL-1.0.txt" "${pkgdir}/usr/share/licenses/${pkgname}/CSL-1.0.txt"
+  install -D -m755 "cuudfdl" "${pkgdir}/opt/cesys-udk/udk3-tools/cuudfdl"
+  install -D -m644 "data/config.xml" "${pkgdir}/opt/cesys-udk/udk3-tools/data/config.xml"
+  install -D -m644 "data/service.xml" "${pkgdir}/opt/cesys-udk/udk3-tools/data/service.xml"
+  install -D -m644 "data/fx2-apo-v2.0.bix" "${pkgdir}/opt/cesys-udk/udk3-tools/data/fx2-apo-v2.0.bix"
+  install -D -m644 "data/fx2-v2.0.bix" "${pkgdir}/opt/cesys-udk/udk3-tools/data/fx2-v2.0.bix"
+  install -D -m644 "data/fx3-v1.3.img" "${pkgdir}/opt/cesys-udk/udk3-tools/data/fx3-v1.3.img"
+  install -D -m755 "libudk3-${pkgver}.so" "${pkgdir}/usr/lib/libudk3-${pkgver}.so"
+  install -D -m755 "libudk3mod-${pkgver}-libusb.so" "${pkgdir}/usr/lib/libudk3mod-${pkgver}-libusb.so"
+  ln -s "/usr/lib/libudk3mod-${pkgver}-libusb.so" "${pkgdir}/opt/cesys-udk/udk3-tools/libudk3mod-${pkgver}-libusb.so"
+  touch "${pkgdir}/opt/cesys-udk/udk3-tools/service.log"
+
+}
