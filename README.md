@@ -55,7 +55,8 @@ cd /path/to/data_and_cuudfld && ./cuudfdl $@
 If you are using archlinux `PKGBUILD`s are available under the
 `contrib/archlinux` folder of this repository. If you are on a debian-based
 distribution you can build packages for your distribution using the scripts
-provided in `contrib/debian`.
+provided in `contrib/debian`. Similary for RedHat-compatible distributions
+there are spec files available under `contrib/redhat`.
 
 ### Examples
 You can check the tests for simple usecases for this library. In general
