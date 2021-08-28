@@ -11,7 +11,7 @@ depends=('cesys-udk')
 source=("https://www.cesys.com/fileadmin/user_upload/service/FPGA/fpga%20boards%20%26%20modules/BeastLink/beastlink-${pkgver}-linux-free.tar.bz2"
         "CSL-1.0.txt")
 sha1sums=('9415f8e0be714e7bfa274b373b5f1684e776f871'
-          '7535094bec6ad88d73780d7e63136a82561a0c0b')
+          'e219fb313545aefb086ee3fecb275e5ab363f73f')
 options=('!strip' 'staticlibs')
 
 build() {
