@@ -2,7 +2,13 @@
 name = "beastlink"
 version = "0.1.0"
 authors = ["Spyros Stathopoulos <spyros@arc-instruments.co.uk>"]
+description = "Rust bindings for CESYS beastlink"
 edition = "2018"
+license = "CSL-1.0"
+homepage = "http://cesys.com"
+repository = "https://github.com/arc-instruments/beastlink-rs"
+
+exclude = ["contrib/*"]
 
 [lib]
 name = "beastlink"
