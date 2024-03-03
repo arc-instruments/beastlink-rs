@@ -7,3 +7,10 @@ target/*
 *.lo
 *.o
 ./*.lib
+contrib/archlinux/*.tar.*
+contrib/archlinux/beastlink/*.tar.*
+contrib/archlinux/cesys-udk/*.tar.*
+contrib/debian/*.deb
+contrib/debian/*.tar.*
+contrib/debian/workarea/*
+contrib/redhat/*.rpm
